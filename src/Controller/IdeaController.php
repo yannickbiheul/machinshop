@@ -10,12 +10,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Censurator;
 
 /**
  * @Route("/idea")
  */
 class IdeaController extends AbstractController
 {
+
+    private $censurator;
+
+    public function __construct(Censurator $censurator) {
+        $this->censurator = $censurator;
+    }
+
     /**
      * @Route("/", name="app_idea_index", methods={"GET"})
      */
@@ -37,6 +45,7 @@ class IdeaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $idea->setContent($this->censurator->purify($idea->getContent()));
             $ideaRepository->add($idea, true);
 
             return $this->redirectToRoute('app_idea_index', [], Response::HTTP_SEE_OTHER);
@@ -45,6 +54,7 @@ class IdeaController extends AbstractController
         return $this->renderForm('idea/new.html.twig', [
             'idea' => $idea,
             'form' => $form,
+            'title' => 'Nouvelle idée'
         ]);
     }
 

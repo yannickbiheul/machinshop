@@ -10,15 +10,22 @@ use App\Service\Fonctions;
 
 class HomeController extends AbstractController
 {
+
+    private $fonctions;
+
+    public function __construct(Fonctions $fonctions) {
+        $this->fonctions = $fonctions;
+    }
+
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ArticleRepository $articleRepo, Fonctions $fonctions): Response
+    public function index(ArticleRepository $articleRepo): Response
     {
-        $title = "Machin Shop";
-        dump($fonctions->mult(5,2));
-        $result = $fonctions->mult(5,10);
-        
+        $title = "Home";
+        dump($this->fonctions->mult(5,2));
+        $result = $this->fonctions->mult(5,10);
+
         return $this->render('home/index.html.twig', [
             'title' => $title,
             'result' => $result,
