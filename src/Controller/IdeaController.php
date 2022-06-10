@@ -69,6 +69,7 @@ class IdeaController extends AbstractController
     }
 
     /**
+     * @isGranted("ROLE_USER")
      * @Route("/{id}/edit", name="app_idea_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
@@ -89,6 +90,7 @@ class IdeaController extends AbstractController
     }
 
     /**
+     * @isGranted("ROLE_ADMIN")
      * @Route("/{id}", name="app_idea_delete", methods={"POST"})
      */
     public function delete(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
