@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Idea
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-4 offset-4 mt-5">
+				<h1>Create new Idea</h1>
+
+				{{ form_start(form) }}
+
+				<div class="group mt-3">
+					{{ form_label(form.title) }}
+					{{ form_widget(form.title) }}
+					{{ form_errors(form.title) }}
+				</div>
+
+				<div class="group mt-3">
+					{{ form_label(form.content) }}
+					{{ form_widget(form.content) }}
+					{{ form_errors(form.content) }}
+				</div>
+
+				<div class="group mt-3">
+					{{ form_label(form.pseudo, null, {
+                        'label': 'Votre pseudo',
+                        'label_attr': {'placeholder': app.user.username}
+                        }) 
+                    }}
+					{{ form_widget(form.pseudo) }}
+					{{ form_errors(form.pseudo) }}
+				</div>
+				{{ form_end(form) }}
+				{# {{ include('idea/_form.html.twig') }} #}
+
+				<a href="{{ path('app_idea_index') }}" class="btn btn-primary mt-3">back to list</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

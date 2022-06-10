@@ -1,49 +1,55 @@
 <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid d-flex justify-content-between">
-  <div class="col-4">
-    <a class="navbar-brand" href="/">Machin Shop</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-    <div class="collapse navbar-collapse col-8 d-flex justify-content-end" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+	{% if app.user %}
+		<span id="hello">Hello
+			{{ app.user.username }}
+			!</span>
+	{% endif %}
+	<div class="container-fluid d-flex justify-content-between">
+		<div class="col-4">
+			<a class="navbar-brand" href="/">Machin Shop</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse col-8 d-flex justify-content-end" id="navbarNavDropdown">
+			<ul class="navbar-nav">
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_article_index') }}">Magasin</a>
-        </li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_article_index') }}">Magasin</a>
+				</li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_article_new') }}">Ajouter machin</a>
-        </li>
+				{# <li class="nav-item">
+													<a class="nav-link" href="{{ path('app_article_new') }}">Ajouter machin</a>
+												</li> #}
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_category_new') }}">Ajouter catégorie</a>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Blog</a>
-        </li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Blog</a>
+				</li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Contact</a>
+				</li>
 
-        {% if app.user %}
-            <li class="nav-item">
-            <a class="nav-link" href="#">Mes machins</a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-            <a class="nav-link" href="#">Inscription</a>
-            </li>
-        {% endif %}
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">Connexion</a>
-        </li>
-
-      </ul>
-    </div>
-  </div>
+				{% if app.user %}
+					<span id="hello">Hello
+						{{ app.user.username }}
+						!</span>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_idea_new') }}">Ajouter idée</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
 </nav>
